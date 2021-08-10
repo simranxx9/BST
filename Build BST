@@ -1,0 +1,58 @@
+// build tree from inorder and postorder
+
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+  int data;
+  struct Node* left;
+  struct Node* right;
+
+  Node(int val)
+  {
+    data = val;
+    left = NULL;
+    right = NULL;
+  }
+};
+
+Node* build_BST(Node* root, int n)
+{
+
+if(root == NULL)
+{
+  return new Node(n);
+}
+  if(root->data < n)
+  {
+    root->right = build_BST(root->right, n);
+  }
+  else if(root->data > n)
+  {
+    root->left = build_BST(root->left, n);
+  }
+  return root;
+}
+
+void inorder(Node * temp)
+{
+  if(temp!=NULL)
+  {
+    inorder(temp->left);
+    cout<<temp->data<<"  ";
+    inorder(temp->right);
+  }
+}
+int main() {
+  // creating a tree from struct
+
+  Node* root = build_BST(root,2);
+  root = build_BST(root, 1);
+  root = build_BST(root, 3);
+  root = build_BST(root, 10);
+  root= build_BST(root, 4);
+
+ 
+inorder(root);
+  
+}
