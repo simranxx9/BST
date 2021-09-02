@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct Node{
+    int data;
+    Node* left;
+    Node* right;
+    Node(int n){
+        data = n;
+        left = NULL;
+        right= NULL;
+    }
+};
+bool areMirror(Node* a, Node* b)
+{
+    if(a == NULL && b == NULL) return true;
+    
+    if(a == NULL || b == NULL) return false;
+    
+    bool one = a->data == b->data;
+    bool two = areMirror(a->left, b->right);
+    bool three = areMirror(a->right, b->left);
+    
+    return one&& two && three;
+}
+void preorder1(Node* root)
+{
+    if(root!=NULL)
+    {
+        cout<<root->data<<" ";
+        preorder1(root->left);
+        preorder1(root->right);
+    }
+}
+int main()
+{
+    Node *a = new Node(1);
+    Node *b = new Node(1);
+    a->left = new Node(2);
+    a->right = new Node(3);
+    a->left->left  = new Node(4);
+    a->left->right = new Node(5);
+ 
+    b->left = new Node(3);
+    b->right = new Node(2);
+    b->right->left = new Node(5);
+    b->right->right = new Node(4);
+ 
+    areMirror(a, b)? cout << "Yes" : cout << "No";
+ 
+    return 0;
+}                         
